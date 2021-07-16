@@ -7,13 +7,16 @@ export const ChatWrapper = styled.section`
   width: 100%;
   
   div {
-    align-items: center;
+     align-items: flex-start;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     background: #e5ddd5;
     border: 1px solid black;
     height: 100vh;
     width: 600px;
     padding: 8px 2%;
+    flex-direction: column;
   }
 `;
+
+
