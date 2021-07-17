@@ -1,5 +1,13 @@
 import React from 'react';
-import { ChatWrapper } from './style';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+
+import {
+  ChatWrapper,
+  ChatContainer,
+  CardMenssagem,
+  FormEnviarMenssagem,
+} from './style';
 import Input from '../Components-Input/InputApp';
 
 class Chat extends React.Component {
@@ -19,6 +27,11 @@ class Chat extends React.Component {
   showMenssagem = (event) => {
     event.preventDefault();
 
+    this.setState({
+      usuarioInputvalue: '',
+      menssagemInputvalue: '',
+    });
+
     const arrCopia = this.state.chat;
     const dados = {
       user: this.state.usuarioInputvalue,
@@ -31,15 +44,18 @@ class Chat extends React.Component {
   render() {
     return (
       <ChatWrapper>
-        <div>
+        <ChatContainer>
           <section>
-            {this.state.chat.map(({user, msg}, index) => (
-              <span key={index}>
-                <strong>{user}: <span>{msg}</span></strong>
-              </span>
+            {this.state.chat.map(({ user, msg }, index) => (
+              <CardMenssagem key={index}>
+                <span>
+                  {user}: <i>{msg}</i>
+                </span>
+              </CardMenssagem>
             ))}
           </section>
-          <form>
+
+          <FormEnviarMenssagem>
             <Input
               placeholder="Usuário"
               value={this.state.usuarioInputvalue}
@@ -50,9 +66,11 @@ class Chat extends React.Component {
               value={this.state.menssagemInputvalue}
               onChange={this.getMenssagemInputValue}
             />
-            <button onClick={this.showMenssagem}>Enviar</button>
-          </form>
-        </div>
+            <button type="submit" onClick={this.showMenssagem}>
+              <FontAwesomeIcon icon={faPaperPlane} />
+            </button>
+          </FormEnviarMenssagem>
+        </ChatContainer>
       </ChatWrapper>
     );
   }
